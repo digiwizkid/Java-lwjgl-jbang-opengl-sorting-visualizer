@@ -13,7 +13,6 @@
 //DEPS org.lwjgl:lwjgl-opengl:3.3.3:natives-macos
 //DEPS org.lwjgl:lwjgl-opengl:3.3.3:natives-windows
 
-import org.lwjgl.*;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
@@ -117,11 +116,7 @@ public class BubbleSortVisualizer {
                 }
             }
             
-            // Draw array
             drawArray();
-            
-            // Draw instructions
-            drawText();
             
             glfwSwapBuffers(window);
             glfwPollEvents();
@@ -185,38 +180,6 @@ public class BubbleSortVisualizer {
         glLoadIdentity();
     }
     
-    private void drawText() {
-        // Simple text indication (since LWJGL text rendering is complex)
-        glColor3f(1.0f, 1.0f, 1.0f);
-        
-        // Draw status indicator with rectangles
-        if (!sorting && !sortComplete) {
-            // Draw "Press SPACE to start" indicator
-            glBegin(GL_QUADS);
-            glVertex2f(10, WINDOW_HEIGHT - 30);
-            glVertex2f(200, WINDOW_HEIGHT - 30);
-            glVertex2f(200, WINDOW_HEIGHT - 10);
-            glVertex2f(10, WINDOW_HEIGHT - 10);
-            glEnd();
-        } else if (sorting) {
-            // Draw "Sorting..." indicator
-            glBegin(GL_QUADS);
-            glVertex2f(10, WINDOW_HEIGHT - 30);
-            glVertex2f(100, WINDOW_HEIGHT - 30);
-            glVertex2f(100, WINDOW_HEIGHT - 10);
-            glVertex2f(10, WINDOW_HEIGHT - 10);
-            glEnd();
-        } else if (sortComplete) {
-            // Draw "Sorted!" indicator
-            glBegin(GL_QUADS);
-            glVertex2f(10, WINDOW_HEIGHT - 30);
-            glVertex2f(80, WINDOW_HEIGHT - 30);
-            glVertex2f(80, WINDOW_HEIGHT - 10);
-            glVertex2f(10, WINDOW_HEIGHT - 10);
-            glEnd();
-        }
-    }
-    
     private void resetArray() {
         // Shuffle the array
         Random random = new Random();
@@ -237,11 +200,3 @@ public class BubbleSortVisualizer {
         new BubbleSortVisualizer().run();
     }
 }
-
-/*
- * jbang BubbleSortVisualizer.java
- * SPACE to start sorting
- * R to reset/shuffle
- * ESC to exit
- * 
- */
